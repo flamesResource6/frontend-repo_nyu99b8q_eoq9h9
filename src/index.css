@@ -43,4 +43,26 @@
     --tw-exit-translate-x: initial;
     --tw-exit-translate-y: initial;
   }
+
+  /* Coming Soon overlay animations */
+  .animate-overlay-fade { animation: overlayFade 420ms ease-out forwards; }
+  .animate-stamp-bounce { animation: stampBounce 720ms cubic-bezier(0.16, 1, 0.3, 1) 60ms forwards; }
+  .animate-glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
+}
+
+@keyframes overlayFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes stampBounce {
+  0% { opacity: 0; transform: translateY(-12px) rotate(-10deg) scale(0.9); filter: drop-shadow(0 0 0 rgba(239,68,68,0)); }
+  60% { opacity: 1; transform: translateY(0) rotate(-6deg) scale(1.03); filter: drop-shadow(0 12px 28px rgba(239,68,68,0.25)); }
+  85% { transform: translateY(0) rotate(-6deg) scale(0.995); }
+  100% { opacity: 1; transform: translateY(0) rotate(-6deg) scale(1); filter: drop-shadow(0 10px 24px rgba(239,68,68,0.22)); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.35); opacity: 0.8; }
+  50% { box-shadow: 0 0 0 6px rgba(239,68,68,0.15); opacity: 1; }
 }
