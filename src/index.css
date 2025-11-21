@@ -48,6 +48,11 @@
   .animate-overlay-fade { animation: overlayFade 420ms ease-out forwards; }
   .animate-stamp-bounce { animation: stampBounce 720ms cubic-bezier(0.16, 1, 0.3, 1) 60ms forwards; }
   .animate-glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
+
+  /* Racetrack theme extras */
+  .animate-light-sweep { animation: lightSweep 6s linear infinite; }
+  .animate-heat-haze { animation: heatHaze 4s ease-in-out infinite; }
+  .animate-smoke-rise { animation: smokeRise 7s ease-in-out infinite; }
 }
 
 @keyframes overlayFade {
@@ -65,4 +70,24 @@
 @keyframes glowPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.35); opacity: 0.8; }
   50% { box-shadow: 0 0 0 6px rgba(239,68,68,0.15); opacity: 1; }
+}
+
+/* Racetrack animations */
+@keyframes lightSweep {
+  0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+  15% { opacity: 0.35; }
+  50% { opacity: 0.15; }
+  100% { transform: translateX(140%) skewX(-12deg); opacity: 0; }
+}
+
+@keyframes heatHaze {
+  0%, 100% { filter: blur(0.25px) contrast(1); transform: translateY(0); opacity: 0.5; }
+  50% { filter: blur(0.8px) contrast(1.02); transform: translateY(-2px); opacity: 0.75; }
+}
+
+@keyframes smokeRise {
+  0% { transform: translate(-40%, 10%) scale(0.9); opacity: 0; }
+  20% { opacity: 0.25; }
+  60% { opacity: 0.18; }
+  100% { transform: translate(40%, -40%) scale(1.2); opacity: 0; }
 }

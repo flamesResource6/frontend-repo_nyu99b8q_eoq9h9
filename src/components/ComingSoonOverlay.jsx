@@ -1,35 +1,50 @@
 import React from 'react'
 
 const ComingSoonOverlay = () => {
+  const trackBg = {
+    backgroundImage:
+      "radial-gradient(80% 60% at 50% 40%, rgba(2,6,23,0.0) 0%, rgba(2,6,23,0.55) 70%, rgba(2,6,23,0.85) 100%), url('https://images.unsplash.com/photo-1629380321590-3b3f75d66dec?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxjZXJhbWljJTIwcG90dGVyeSUyMGhhbmRtYWRlfGVufDB8MHx8fDE3NjM2MjQzMTR8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80')",
+    backgroundSize: 'cover, cover',
+    backgroundPosition: 'center, center',
+  }
+
   return (
     <div className="fixed inset-0 z-50 pointer-events-none">
-      {/* Dim + blur backdrop with track texture */}
+      {/* Full racetrack scene backdrop */}
       <div className="absolute inset-0 opacity-0 animate-overlay-fade">
-        <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-[2px]" />
-        {/* Macro asphalt texture for race track up-close feel */}
-        <div
-          className="absolute inset-0 mix-blend-multiply opacity-70"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1629380321590-3b3f75d66dec?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxjZXJhbWljJTIwcG90dGVyeSUyMGhhbmRtYWRlfGVufDB8MHx8fDE3NjM2MjQzMTR8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80'), radial-gradient(ellipse at center, rgba(2,6,23,0) 40%, rgba(2,6,23,0.6) 85%, rgba(2,6,23,0.85) 100%)",
-            backgroundSize: 'cover, cover',
-            backgroundPosition: 'center, center',
-          }}
-        />
-        {/* Subtle film grain */}
+        {/* Asphalt texture + racing line markings */}
+        <div className="absolute inset-0" style={trackBg} />
+
+        {/* Painted curbs (red/white), faint and large-scale for realism */}
+        <div className="absolute inset-x-0 bottom-0 h-64 sm:h-72 md:h-80 opacity-25 mix-blend-overlay"
+             style={{
+               backgroundImage:
+                 'repeating-linear-gradient(90deg, rgba(244,63,94,0.8) 0 36px, rgba(244,63,94,0.8) 36px 72px, rgba(255,255,255,0.9) 72px 108px, rgba(255,255,255,0.9) 108px 144px)',
+               transform: 'skewY(-6deg) translateY(18%)',
+               transformOrigin: 'bottom left'
+             }} />
+
+        {/* Light sweep hint like track lights */}
+        <div className="absolute inset-y-0 -left-1/3 w-2/3 bg-gradient-to-r from-white/0 via-white/15 to-white/0 animate-light-sweep" />
+
+        {/* Film grain and heat haze */}
         <div className="absolute inset-0 opacity-30" style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 2px), repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 2px)'
+            'repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 2px), repeating-linear-gradient(90deg, rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 1px, transparent 1px, transparent 2px)'
         }} />
+        <div className="absolute inset-0 animate-heat-haze" />
+
+        {/* Subtle drifting smoke */}
+        <div className="absolute right-[10%] bottom-[20%] w-[36vw] max-w-[520px] aspect-[3/2] rounded-full bg-gradient-to-tr from-white/10 via-white/5 to-transparent blur-2xl opacity-40 animate-smoke-rise" />
       </div>
 
-      {/* Scene with perspective */}
+      {/* Scene with perspective for the poster */}
       <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8" style={{ perspective: '1200px' }}>
         <div className="relative pointer-events-auto select-none opacity-0 animate-stamp-bounce" aria-label="This page is coming soon">
           {/* Cast shadow for depth on asphalt */}
           <div className="absolute -inset-6 blur-xl rounded-[40px]" style={{
             background:
-              'radial-gradient(60% 40% at 50% 60%, rgba(0,0,0,0.45), rgba(0,0,0,0) 70%)'
+              'radial-gradient(60% 40% at 50% 60%, rgba(0,0,0,0.5), rgba(0,0,0,0) 70%)'
           }} />
 
           {/* Poster sheet */}
@@ -38,7 +53,7 @@ const ComingSoonOverlay = () => {
             style={{ transformStyle: 'preserve-3d' }}
           >
             {/* Torn paper silhouette using layered gradients */}
-            <div className="relative rounded-[18px] shadow-[0_25px_60px_rgba(0,0,0,0.45)]">
+            <div className="relative rounded-[18px] shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
               <div className="relative rounded-[18px] overflow-hidden">
                 {/* Paper base */}
                 <div className="relative rounded-[18px] bg-[rgb(248,245,240)]">
@@ -60,11 +75,18 @@ const ComingSoonOverlay = () => {
                       'radial-gradient(4px 4px at 15% 35%, rgba(0,0,0,0.20), transparent 60%), radial-gradient(6px 6px at 35% 65%, rgba(0,0,0,0.18), transparent 60%), radial-gradient(3px 3px at 72% 22%, rgba(0,0,0,0.22), transparent 60%), radial-gradient(5px 5px at 80% 48%, rgba(0,0,0,0.18), transparent 60%)'
                   }} />
 
-                  {/* Partial tire mark across poster */}
-                  <div className="absolute -left-6 right-0 top-8 h-24 rotate-[-6deg] opacity-25 mix-blend-multiply" style={{
+                  {/* Bold tire mark arc across poster */}
+                  <div className="absolute -left-10 right-0 top-8 h-24 rotate-[-6deg] opacity-30 mix-blend-multiply" style={{
                     backgroundImage:
                       'repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 4px, rgba(0,0,0,0) 4px 10px)'
                   }} />
+
+                  {/* Grid of racing sponsors ghosted in background */}
+                  <div className="absolute inset-x-0 bottom-10 grid grid-cols-3 sm:grid-cols-6 gap-4 px-8 opacity-10 text-slate-800/80">
+                    {['PIRELLI','BREMBO','MOTUL','SPARCO','AKRAPOVIC','BOSCH'].map((b) => (
+                      <div key={b} className="text-[10px] sm:text-xs font-black tracking-widest uppercase text-center">{b}</div>
+                    ))}
+                  </div>
 
                   {/* Content area */}
                   <div className="relative px-6 sm:px-10 md:px-14 py-8 sm:py-10 md:py-12">
@@ -96,19 +118,18 @@ const ComingSoonOverlay = () => {
                       {/* Poster Title and copy */}
                       <div className="pt-28 sm:pt-28">
                         <p className="text-sm sm:text-base text-slate-800/90 leading-relaxed max-w-3xl">
-                          Soon, our customers will be able to:
+                          Built for speed. Expect full racetrack telemetry and control:
                         </p>
                         <ul className="mt-4 space-y-2 text-[13px] sm:text-sm text-slate-800/90 leading-relaxed marker:text-slate-700">
-                          <li>– View and track all bought vehicles and purchase history in one place</li>
-                          <li>– Monitor live auctions with smart bid charts and auto-bid controls</li>
-                          <li>– Manage alerts and notifications about bids and price movements</li>
-                          <li>– Update their profile, contact details, and account settings</li>
-                          <li>– Review full bids history and performance over time</li>
-                          <li>– Organize and revisit their saved vehicles shortlist</li>
-                          <li>– Share verified testimonials with ratings and profile photos</li>
-                          <li>– Chat instantly with their dedicated sales representative via in-page chat and WhatsApp</li>
-                          <li>– Access a self-service help center for bidding, payments, and support</li>
-                          <li>…all from one powerful dashboard.</li>
+                          <li>– Live lap times with sector splits and delta overlays</li>
+                          <li>– Heat‑map bidding lanes with pit‑stop recommendations</li>
+                          <li>– Telemetry‑style alerts for price spikes and undercuts</li>
+                          <li>– Garage view for vehicles with health, history, and setup</li>
+                          <li>– Team radio: instant chat with your sales engineer</li>
+                          <li>– Safety car mode: budget locks and risk guardrails</li>
+                          <li>– Replay center for bids, wins, and performance analysis</li>
+                          <li>– Track‑ready profiles and credential badges</li>
+                          <li>…all tuned for podium‑level results.</li>
                         </ul>
                         <div className="mt-6">
                           <p className="text-sm font-semibold tracking-wide text-slate-700">Brought to you by GariDeals.</p>
